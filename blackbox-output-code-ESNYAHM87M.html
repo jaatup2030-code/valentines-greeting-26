@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Place Where You're Always Loved</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ffe6f0, #fff5f7);
+            color: #5a4a5a;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1, h2 {
+            font-family: 'Georgia', serif;
+            color: #d63384;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        button {
+            background: #ffb3ba;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #ff8fa3;
+        }
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .heart {
+            position: absolute;
+            color: #ffb3ba;
+            font-size: 20px;
+            animation: float 6s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        .hidden {
+            display: none;
+        }
+        .letter {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #affirmation {
+            font-style: italic;
+            margin-top: 20px;
+        }
+        #hidden-surprise {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="container">
+        <section id="landing" class="fade-in">
+            <h1>Before you scroll…</h1>
+            <p>I just want you to know something.</p>
+            <button onclick="showReminder()">💌 Click if you need a reminder.</button>
+        </section>
+
+        <section id="reminder" class="hidden fade-in">
+            <h2>You are loved.</h2>
+            <p>Even on days you forget it.<br>Even on days you don't feel it.<br>Even on days you think you don't deserve it.</p>
+            <p>This website exists just to remind you of that.</p>
+        </section>
+
+        <section id="personalized" class="hidden fade-in">
+            <h2>Why You Matter</h2>
+            <p>The way you laugh is healing.<br>The way you care is rare.<br>The way you exist makes the world softer.</p>
+            <p>I love how you… [Customize this part for specific people]</p>
+        </section>
+
+        <section id="letters" class="hidden fade-in">
+            <h2>Interactive "Open When" Letters</h2>
+            <button onclick="openLetter('unloved')">💔 Open when you feel unloved</button>
+            <div id="unloved" class="letter hidden">
+                <p>I promise you, love doesn't disappear just because you can't feel it right now. You are still held. Still valued. Still wanted.</p>
+            </div>
+            <button onclick="openLetter('sad')">😔 Open when you're sad</button>
+            <div id="sad" class="letter hidden">
+                <p>Your sadness is valid, but it doesn't define you. There will always be a version of the world where you are loved.</p>
+            </div>
+            <button onclick="openLetter('doubt')">🌟 Open when you doubt yourself</button>
+            <div id="doubt" class="letter hidden">
+                <p>You are doing better than you think. Your existence is not accidental.</p>
+            </div>
+            <button onclick="openLetter('miss')">💞 Open when you miss me</button>
+            <div id="miss" class="letter hidden">
+                <p>I'm here, even in spirit. You are someone's safe place.</p>
+            </div>
+            <button onclick="openLetter('amazing')">🫶 Open when you forget how amazing you are</button>
+            <div id="amazing" class="letter hidden">
+                <p>You are not hard to love. The world is better with you in it.</p>
+            </div>
+        </section>
+
+        <section id="generator" class="hidden fade-in">
+            <h2>Cute Affirmation Generator</h2>
+            <button onclick="generateAffirmation()">✨ Give me a random reminder</button>
+            <p id="affirmation"></p>
+        </section>
+
+        <section id="days" class="hidden fade-in">
+            <h2>"On Days When…"</h2>
+            <p>On days when you feel behind — you're still on your path.<br>On days when you feel too much — your depth is beautiful.<br>On days when you feel not enough — you are more than enough.</p>
+        </section>
+    </div>
+
+    <div id="hidden-surprise" onclick="showSurprise()">💖</div>
+
+    <script>
+        const affirmations = [
+            "You are not hard to love.",
+            "You are someone's safe place.",
+            "The world is better with you in it.",
+            "You are doing better than you think.",
+            "Your existence is not accidental."
+        ];
+
+        function showReminder() {
+            document.getElementById('reminder').classList.remove('hidden');
+            document.getElementById('personalized').classList.remove('hidden');
+            document.getElementById('letters').classList.remove('hidden');
+            document.getElementById('generator').classList.remove('hidden');
+            document.getElementById('days').classList.remove('hidden');
+        }
+
+        function openLetter(id) {
+            const letter = document.getElementById(id);
+            letter.classList.toggle('hidden');
+        }
+
+        function generateAffirmation() {
+            const random = affirmations[Math.floor(Math.random() * affirmations.length)];
+            document.getElementById('affirmation').textContent = random;
+        }
+
+        function showSurprise() {
+            alert("If you found this, you deserve an extra hug. Here's one. 🫂");
+        }
+
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.textContent = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDelay = Math.random() * 6 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 1000);
+    </script>
+</body>
+</html>
